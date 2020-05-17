@@ -1,0 +1,8 @@
+[user]
+	name = Jose Angel Garrido Montoya
+	email = jgarri04@ucm.es
+    username = joseangelgm
+[alias]
+    st = status
+    ci = commit
+    co = checkout
