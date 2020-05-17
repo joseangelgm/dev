@@ -60,6 +60,12 @@ if [ $INSTALL_ZSH = "yes" ]; then
     fi
     create_symbolic_link "$CONFIG_DIR/terminator.conf" "$HOME/.config/terminator/config"
     ####################
+
+    # installing .warprc for wd zsh plugin
+    echo
+    echo "Setting up warprcs"
+    create_symbolic_link "$CONFIG_DIR/.warprc" "$HOME/.warprc"
+    ######################################
 fi
 
 if [ $INSTALL_TMUX = "yes" ]; then
