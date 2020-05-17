@@ -13,7 +13,7 @@ create_symbolic_link(){
     root=$3
 
     if [ -f "$dest" ] || [ -d "$dest" ] || [ -L "$dest" ]; then
-        echo "Exists a file/folder in $dest"
+        echo "Exists a file/folder/symlink in $dest"
         option=$(prompt_choose_option $dest)
         if [[ $option = "yes" ]]; then
             echo "Overwriting $dest"
