@@ -8,8 +8,9 @@
 
 usage(){
     echo
-    echo " Usage: $(basename $0) [-a] [-v] [-z] [-i] [-n] [-c] [-t] [-r] [-m] [-h]"
+    echo " Usage: $(basename $0) [-a] [-g] [-v] [-z] [-i] [-n] [-c] [-t] [-r] [-m] [-h]"
     echo " -a: install all. (Not included tmux)"
+    echo " -g: install git configuration: gitconfig"
     echo " -v: install vim. Include .vimrc, .vim folder and plugins(gitsubmodules)"
     echo " -z: install zsh. Include .zshrc, .oh_my_zsh folder and terminator config file."
     echo " -i: install i3. Include i3config, i3blocks (not included i3status, not using)."
@@ -30,6 +31,7 @@ fi
 ROOT_DIR=$(dirname $0)
 COMPONENTS=$ROOT_DIR/components
 
+INSTALL_GIT="no"
 INSTALL_VIM="no"
 INSTALL_ZSH="no"
 INSTALL_I3="no"
@@ -45,8 +47,9 @@ while getopts $PARAMETERS opt; do
     case $opt in
         a)  INSTALL_VIM="yes"; INSTALL_ZSH="yes"; INSTALL_I3="yes";
             INSTALL_NITROGEN="yes"; INSTALL_COMPTON="yes"; INSTALL_TMUX="yes";
-            INSTALL_ROFI="yes"; INSTALL_NETWORK="yes"
+            INSTALL_ROFI="yes"; INSTALL_NETWORK="yes"; INSTALL_GIT="yes"
             ;;
+        g) INSTALL_GIT="yes";;
         v) INSTALL_VIM="yes";;
         z) INSTALL_ZSH="yes";;
         i) INSTALL_I3="yes";;
@@ -60,7 +63,11 @@ while getopts $PARAMETERS opt; do
     esac
 done
 
-if [ $INSTALL_VIM = "yes" ]; then
+if [ "$INSTALL_GIT" = "yes" ]; then
+    $ROOT_DIR/$COMPONENTS/git/install.sh
+fi
+
+if [ "$INSTALL_VIM" = "yes" ]; then
     $ROOT_DIR/$COMPONENTS/vim/install.sh
 fi
 
