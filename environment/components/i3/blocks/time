@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# to display weekday in english and it will not affect to environment
+LC_TIME=en_US
+TIME=$(date '+%H:%M %a %d-%m-%Y')
+
+echo "$TIME"
+echo "$TIME"
+echo "#FFFFFF"

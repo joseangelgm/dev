@@ -1,0 +1,46 @@
+#!/usr/bin/python3
+
+import requests
+import json
+import yaml
+import os
+
+dir_path = os.path.dirname(os.path.realpath(__file__)) #get full path in order to open WEATHER_FILE properly
+WEATHER_FILE=str(dir_path) + "/weather_data.yaml"
+
+weather_data = ""
+with open(WEATHER_FILE, 'r') as stream:
+    weather_data = yaml.load(stream, Loader=yaml.SafeLoader)
+
+data = {
+    'id' : str(weather_data['city_id']),
+    'units' : 'metric',
+    'appid' : str(weather_data['api_key'])
+}
+
+request = requests.post(url = str(weather_data['endpoint']), params = data)
+request_text = request.text
+json_result = json.loads(request_text)
+
+temperature = str(json_result['main']['temp'])
+weather_condition = str(json_result['weather'][0]['main'])
+
+if weather_condition == 'Thunderstorm':
+    print("" + str(temperature))
+elif weather_condition == 'Drizzle':
+    print("" + str(temperature))
+elif weather_condition == 'Rain':
+    print("" + str(temperature))
+elif weather_condition == 'Snow':
+    print("" + str(temperature))
+elif weather_condition == 'Clear':
+    print("" + str(temperature))
+elif weather_condition == 'Clouds':
+    print("" + str(temperature))
+elif weather_condition in ['Mist', 'Haze', 'Fog']:
+    print("" + str(temperature))
+else:
+    print(weather_condition)
+
+print(str(temperature))
+print('#F49242')

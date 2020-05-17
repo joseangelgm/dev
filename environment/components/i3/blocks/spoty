@@ -1,0 +1,46 @@
+#!/bin/bash
+
+ICON=""
+proc=$(pgrep spotify)
+
+if [[ -z $proc ]]; then
+    exit 0
+fi
+
+PLAY_COMMAND="Play"
+PAUSE_COMMAND="Pause"
+TOGGLE_COMMAND="PlayPause"
+PREVIOUS_COMMAND="Previous"
+NEXT_COMMAND="Next"
+
+SPOTIFY_DEST="org.mpris.MediaPlayer2.spotify"
+SPOTIFY_PATH="/org/mpris/MediaPlayer2"
+SPOTIFY_CONTROLLER="org.mpris.MediaPlayer2.Player"
+
+execute_command(){
+    dbus-send --print-reply --dest=$SPOTIFY_DEST $SPOTIFY_PATH $SPOTIFY_CONTROLLER.$1 > /dev/null
+}
+
+case $BLOCK_BUTTON in
+    1) execute_command $TOGGLE_COMMAND;; # left click
+    3) execute_command $TOGGLE_COMMAND;; # right click
+    4) execute_command $PREVIOUS_COMMAND;; # scroll up
+    5) execute_command $NEXT_COMMAND;; # scroll down
+esac
+
+# be sure it is stable to retrieve data from the song
+sleep 0.5
+
+ALBUM="xesam:album"
+ARTIST="xesam:albumArtist"
+TITLE="xesam:title"
+
+output='dbus-send --print-reply --dest=$SPOTIFY_DEST $SPOTIFY_PATH org.freedesktop.DBus.Properties.Get string:$SPOTIFY_CONTROLLER string:Metadata'
+
+album=$(eval "$output" | grep -w $ALBUM -C 1 | grep 'variant' | grep -o '\"\([^"]*\)\"'| sed 's/\"//g')
+title=$(eval "$output" | grep -w $TITLE -C 1 | grep 'variant' | grep -o '\"\([^"]*\)\"'| sed 's/\"//g')
+artist=$(eval "$output" | grep -w $ARTIST -C 2 | grep 'variant' -A 1 | grep -o '\"\([^"]*\)\"'| sed 's/\"//g')
+
+echo "$ICON $album : $artist - $title"
+echo "$ICON $title"
+echo "#13F7C6"

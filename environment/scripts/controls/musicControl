@@ -1,0 +1,21 @@
+#!/bin/bash
+
+proc=$(pgrep spotify)
+
+if ! [[ -z $proc ]]; then
+    SPOTIFY_DEST="org.mpris.MediaPlayer2.spotify"
+    SPOTIFY_PATH="/org/mpris/MediaPlayer2"
+    SPOTIFY_CONTROLLER="org.mpris.MediaPlayer2.Player"
+
+    execute_command(){
+        dbus-send --print-reply --dest=$SPOTIFY_DEST $SPOTIFY_PATH $SPOTIFY_CONTROLLER.$1 > /dev/null
+    }
+
+    case "$1" in
+        "toggle") execute_command "PlayPause";;
+        "pause") execute_command "Pause";;
+        "next") execute_command "Next";;
+        "prev") execute_command "Previous";;
+    esac
+    pkill -SIGRTMIN+4 i3blocks
+fi

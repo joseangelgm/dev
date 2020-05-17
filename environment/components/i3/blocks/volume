@@ -1,0 +1,34 @@
+#!/bin/bash
+
+MIXER="Master"
+
+case $BLOCK_BUTTON in
+    3) amixer -q -D pulse sset Master toggle > /dev/null;; # right click
+    4) amixer set Master 5%+ > /dev/null;; # scroll up
+    5) amixer set Master 5%- > /dev/null;; # scroll down
+esac
+
+VOLUME_LEVEL=$(amixer get $MIXER | grep Mono: | awk '{print $4}' | cut -d '[' -f 2 | cut -d ']' -f 1 | cut -d '%' -f 1)
+STATE=$(amixer get $MIXER | grep Mono: | awk '{print $6}' | cut -d '[' -f 2 | cut -d ']' -f 1)
+
+if [[ "$STATE" = "on" ]]; then
+
+    if [[ "$VOLUME_LEVEL " -ge "50" ]]; then
+        echo "$VOLUME_LEVEL"
+        echo "$VOLUME_LEVEL"
+    elif [[ "$VOLUME_LEVEL" -ge "15" ]]; then
+        echo "$VOLUME_LEVEL"
+        echo "$VOLUME_LEVEL"
+    else
+        echo "$VOLUME_LEVEL"
+        echo "$VOLUME_LEVEL"
+    fi
+elif [[ "$STATE" = "off" ]]; then
+    echo "Mute"
+    echo "Mute"
+else
+    echo "Unknown"
+    echo "Unknown"
+fi
+echo "#A1FF3D"
+

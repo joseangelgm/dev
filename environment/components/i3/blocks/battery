@@ -1,0 +1,47 @@
+#!/bin/bash
+
+# Created by Jose Angel Garrido Montoya
+
+ICON_CHARGING=""
+ICON_DISCHARGING_FULL=""
+ICON_DISCHARGING_THREE=""
+ICON_DISCHARGING_HALF=""
+ICON_DISCHARGING_TWO=""
+ICON_DISCHARGING_EMPTY=""
+
+STATE=$(acpi | head -n 1 | awk '{print $3}' | cut -d ',' -f 1)
+PERCENTAGE=$(acpi | head -n 1 | awk '{print $4}' | cut -d ',' -f 1 | cut -d '%' -f 1)
+TIME_LEFT=$(acpi | head -n 1 | awk '{print $5}')
+STATUS=$(acpi -t | head -n 1 | awk '{print $3}' | cut -d ',' -f 1)
+TEMPERATURE=$(acpi -t | head -n 1 | awk '{print $4}')
+
+if [[ "$STATE" = "Charging" ]]; then
+    echo "$ICON_CHARGING $PERCENTAGE $TIME_LEFT $STATUS $TEMPERATURE"
+    echo "$ICON_CHARGING $PERCENTAGE $STATUS $TEMPERATURE"
+elif [[ $STATE = "Discharging" ]]; then
+    if [[ $PERCENTAGE -ge "75" ]]; then
+        echo "$ICON_DISCHARGING_FULL $PERCENTAGE $TIME_LEFT $STATUS $TEMPERATURE"
+        echo "$ICON_DISCHARGING_FULL $PERCENTAGE $STATUS $TEMPERATURE"
+    elif [[ $PERCENTAGE -ge "50" ]]; then
+        echo "$ICON_DISCHARGING_THREE $PERCENTAGE $TIME_LEFT $STATUS $TEMPERATURE"
+        echo "$ICON_DISCHARGING_THREE $PERCENTAGE $STATUS $TEMPERATURE"
+    elif [[ $PERCENTAGE -ge "25" ]]; then
+        echo "$ICON_DISCHARGING_HALF $PERCENTAGE $TIME_LEFT $STATUS $TEMPERATURE"
+        echo "$ICON_DISCHARGING_HALF $PERCENTAGE $STATUS $TEMPERATURE"
+    elif [[ $PERCENTAGE -ge "15" ]]; then
+        echo "$ICON_DISCHARGING_TWO $PERCENTAGE $TIME_LEFT $STATUS $TEMPERATURE"
+        echo "$ICON_DISCHARGING_TWO $PERCENTAGE $STATUS $TEMPERATURE"
+    else
+        echo "$ICON_DISCHARGING_EMPTY $PERCENTAGE Plug the charger"
+        echo "$ICON_DISCHARGING_EMPTY $PERCENTAGE Plug the charger"
+        echo "#F4425F"
+        notify-send "Connect the charger: $PERCENTAGE"
+    fi
+elif [[ $STATE = "Full" ]]; then
+    echo "Fully charged"
+    echo "Fully"
+else
+    echo "$STATE"
+    echo "$STATE"
+fi
+echo "#FFFFFF"

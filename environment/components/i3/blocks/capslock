@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ICON=""
+STATE=$(xset q | grep 'Caps Lock' | awk '{print $4}')
+
+echo "$ICON"
+echo "$ICON"
+
+if [ "$STATE" = "on" ]; then
+		echo "#42F459"
+else
+		echo "#EF5240"
+fi

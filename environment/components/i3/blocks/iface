@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Created by Jose Angel Garrido Montoya
+
+ICON=""
+INTERFACES=("enp3s0" "wlo1")
+INTERFACE="none"
+
+for interface in "${INTERFACES[@]}"; do
+    if [[ "$(cat /sys/class/net/$interface/operstate)" = 'up' ]]; then
+        INTERFACE=$interface
+        break
+    fi
+done
+
+# if there is not interface up, just dont display anything
+if [[ $INTERFACE = "none" ]]; then
+    echo "No interface"
+    echo "No interface"
+    echo "#EF2F49"
+else
+    IP_ADDRESS=$(ip a | grep $INTERFACE | grep inet | awk '{print $2}')
+
+    echo $ICON $INTERFACE $IP_ADDRESS # full text
+    echo $ICON $IP_ADDRESS # short text
+    echo "#E5B652"
+fi
+

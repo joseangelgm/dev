@@ -1,0 +1,19 @@
+#!/bin/bash
+
+ICON=""
+updates=$(checkupdates)
+
+if [[ -z "$updates" ]]; then
+    exit
+else
+    PACKAGES=$(checkupdates | wc -l | awk '{print $1}')
+    echo "$ICON Updates:$PACKAGES"
+    echo "$ICON $PACKAGES"
+    echo "#F260DC"
+fi
+
+case $BLOCK_BUTTON in
+    # right-click
+    #3) pamac checkupdates > /tmp/updates.tmp; terminator -e "less /tmp/updates.tmp; rm /tmp/updates.tmp";;
+    3) terminator -e "checkupdates | less";;
+esac

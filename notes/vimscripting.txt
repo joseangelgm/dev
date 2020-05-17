@@ -1,0 +1,5 @@
+:help usr_41.txt
+http://learnvimscriptthehardway.stevelosh.com/chapters/21.html
+https://devhints.io/vimscript#mapping
+http://vimdoc.sourceforge.net/htmldoc/usr_41.html
+http://andrewscala.com/vimscript/

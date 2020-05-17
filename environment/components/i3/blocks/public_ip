@@ -1,0 +1,12 @@
+#!/bin/bash
+
+ICON=""
+PUBLIC_IP=$(curl http://ifconfig.me/ip)
+
+if [[ -z $PUBLIC_IP ]]; then
+    exit
+fi
+
+echo "$ICON $PUBLIC_IP"
+echo "$ICON $PUBLIC_IP"
+echo "#F71165"

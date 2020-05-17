@@ -1,0 +1,9 @@
+#!/bin/bash
+
+case "$1" in
+    "up") amixer sset 'Master' 5%+;;
+    "down") amixer sset 'Master' 5%-;;
+    "toggle") amixer sset 'Master' toggle;;
+esac
+
+pkill -SIGRTMIN+2 i3blocks

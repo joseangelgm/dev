@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ICON=""
+FREE_DISK=$(df -h | grep /dev/sda2 | awk '{print $4}')
+
+echo "$ICON $FREE_DISK"
+echo "$ICON $FREE_DISK"
+echo "#00CCCC"

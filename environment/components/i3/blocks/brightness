@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ICON=""
+
+case $BLOCK_BUTTON in
+    4) sudo light -A 5;; # scroll up
+    5) sudo light -U 5;; # scroll down
+esac
+
+BRIGHTNESS=$(sudo light)
+echo "$ICON $BRIGHTNESS%"
+echo "$BRIGHTNESS%"
+echo "#F4E842"

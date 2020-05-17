@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Created by Jose Angel Garrido Montoya
+
+TEMPERATURE_HIGH="50"
+
+ICON_TEMPERATURE_HIGH=""
+ICON_TEMPERATURE_LOW=""
+
+
+print_temperature(){
+    temperature=$1
+    temp=$(echo "$temperature" | cut -d '.' -f 1)
+    if [[ $temp -ge $TEMPERATURE_HIGH ]]; then
+        echo "$ICON_TEMPERATURE_HIGH $temperature"
+    else
+        echo "$ICON_TEMPERATURE_LOW $temperature"
+    fi
+}
+
+CPU_TEMP_0=$(sensors | grep 'Core 0' | awk '{print $3}' | cut -d '+' -f 2)
+CPU_TEMP_1=$(sensors | grep 'Core 1' | awk '{print $3}' | cut -d '+' -f 2)
+
+
+echo "$(print_temperature $CPU_TEMP_0) $(print_temperature $CPU_TEMP_1)"
+echo "$(print_temperature $CPU_TEMP_0) $(print_temperature $CPU_TEMP_1)"
+echo "#FFFFFF"

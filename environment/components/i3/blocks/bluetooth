@@ -1,0 +1,27 @@
+#!/bin/bash
+
+ICON=""
+
+state_bluetooth=$(bluetooth | cut -d " " -f 3)
+
+if [ "$state_bluetooth" = "on" ]; then
+    device_info=$(bluetoothctl info)
+    if [[ "$?" -eq 0 ]]; then
+        device_name=$(echo "$device_info" | grep 'Name:' | cut -d ' ' -f 2)
+        echo "$ICON $device_name"
+        echo "$ICON $device_name"
+        echo "#BC42F4"
+    else
+        # if info didnt run properly(bluetooh on but no connect with a device)
+        echo "$ICON on"
+        echo "$ICON on"
+        echo "#42F4AA"
+    fi
+elif [ "$state_bluetooth" = "off" ]; then
+    exit
+else
+    echo "$ICON unknown"
+    echo "$ICON unknown"
+    echo "#F44259"
+fi
+

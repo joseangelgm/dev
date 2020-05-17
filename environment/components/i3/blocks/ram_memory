@@ -1,0 +1,8 @@
+#!/bin/bash
+
+USED_RAM=$(free -h | grep "Mem:" | awk '{print $3}')
+FREE_RAM=$(free -h | grep "Mem:" | awk '{print $4}')
+
+echo "U: $USED_RAM F: $FREE_RAM"
+echo "$USED_RAM $FREE_RAM"
+echo "#40EF83"

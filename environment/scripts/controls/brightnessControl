@@ -1,0 +1,8 @@
+#!/bin/bash
+
+case "$1" in
+    "up") sudo light -A 5;;
+    "down") sudo light -U 5;;
+esac
+
+pkill -SIGRTMIN+3 i3blocks

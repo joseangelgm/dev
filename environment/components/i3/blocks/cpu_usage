@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Command took from https://stackoverflow.com/questions/9229333/how-to-get-overall-cpu-sage-e-g-57-on-linux
+
+ICON=""
+CPU_USAGE=$(ps -A -o pcpu | tail -n+2 | paste -sd+ | bc)
+
+echo "$ICON $CPU_USAGE%" # full text
+echo "$ICON $CPU_USAGE%" # short text
+echo "#FFFFFF"
