@@ -1,0 +1,33 @@
+[submodule "environment/components/vim/config/.vim/bundle/Vundle.vim"]
+	path = environment/components/vim/config/.vim/bundle/Vundle.vim
+	url = https://github.com/VundleVim/Vundle.vim.git
+[submodule "environment/components/vim/config/.vim/bundle/nerdtree"]
+	path = environment/components/vim/config/.vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "environment/components/vim/config/.vim/bundle/lightline.vim"]
+	path = environment/components/vim/config/.vim/bundle/lightline.vim
+	url = https://github.com/itchyny/lightline.vim.git
+[submodule "environment/components/vim/config/.vim/bundle/vim-gitbranch"]
+	path = environment/components/vim/config/.vim/bundle/vim-gitbranch
+	url = https://github.com/itchyny/vim-gitbranch.git
+[submodule "environment/components/vim/config/.vim/bundle/ctrlp.vim"]
+	path = environment/components/vim/config/.vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "environment/components/vim/config/.vim/bundle/vim-buftabline"]
+	path = environment/components/vim/config/.vim/bundle/vim-buftabline
+	url = https://github.com/ap/vim-buftabline.git
+[submodule "environment/components/vim/config/.vim/bundle/vim-shebang"]
+	path = environment/components/vim/config/.vim/bundle/vim-shebang
+	url = https://github.com/vitalk/vim-shebang.git
+[submodule "environment/components/vim/config/.vim/bundle/vim-better-whitespace"]
+	path = environment/components/vim/config/.vim/bundle/vim-better-whitespace
+	url = https://github.com/ntpeters/vim-better-whitespace.git
+[submodule "environment/components/vim/config/.vim/bundle/vim-gitgutter"]
+	path = environment/components/vim/config/.vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
+[submodule "environment/components/vim/config/.vim/bundle/Colorizer"]
+	path = environment/components/vim/config/.vim/bundle/Colorizer
+	url = https://github.com/chrisbra/Colorizer.git
+[submodule "environment/components/vim/config/.vim/bundle/vim-cpp-modern"]
+	path = environment/components/vim/config/.vim/bundle/vim-cpp-modern
+	url = https://github.com/bfrg/vim-cpp-modern.git
