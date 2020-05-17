@@ -26,21 +26,10 @@ if [[ $# -eq 0 ]]; then
     exit 1;
 fi
 
-#### Functions ####
-install_modules() {
-    echo "Installing submodules..."
-    git submodule init
-    git submodule update --recursive
-}
-
 #### VARIABLES ####
 ROOT_DIR=$(dirname $0)
 COMPONENTS=$ROOT_DIR/components
 
-# packages
-VIM_PACKAGE="vim"
-
-INSTALL_MODULES="no"
 INSTALL_VIM="no"
 INSTALL_ZSH="no"
 INSTALL_I3="no"
@@ -50,15 +39,14 @@ INSTALL_TMUX="no"
 INSTALL_ROFI="no"
 INSTALL_NETWORK="no"
 
-PARAMETERS="agvzinctrmh"
+PARAMETERS="avzinctrmh"
 
 while getopts $PARAMETERS opt; do
     case $opt in
-        a)  INSTALL_MODULES="yes"; INSTALL_VIM="yes"; INSTALL_ZSH="yes";
-            INSTALL_I3="yes"; INSTALL_NITROGEN="yes"; INSTALL_COMPTON="yes";
-            INSTALL_TMUX="yes"; INSTALL_ROFI="yes"; INSTALL_NETWORK="yes"
+        a)  INSTALL_VIM="yes"; INSTALL_ZSH="yes"; INSTALL_I3="yes";
+            INSTALL_NITROGEN="yes"; INSTALL_COMPTON="yes"; INSTALL_TMUX="yes";
+            INSTALL_ROFI="yes"; INSTALL_NETWORK="yes"
             ;;
-        g) INSTALL_MODULES="yes";;
         v) INSTALL_VIM="yes";;
         z) INSTALL_ZSH="yes";;
         i) INSTALL_I3="yes";;
@@ -72,20 +60,8 @@ while getopts $PARAMETERS opt; do
     esac
 done
 
-if [ $INSTALL_MODULES = "yes" ]; then
-    install_modules
-fi
-
 if [ $INSTALL_VIM = "yes" ]; then
-    echo
-    echo "Setting up vim..."
-    result=$(check_package_install $VIM_PACKAGE)
-    if [[ "$result" = "no" ]]; then
-        install_package $VIM_PACKAGE
-    fi
-    install_modules
-    create_symbolic_link "$ROOT_DIR/.vimrc" "$HOME/.vimrc"
-    create_symbolic_link "$ROOT_DIR/.vim" "$HOME/.vim"
+    $ROOT_DIR/$COMPONENTS/vim/install.sh
 fi
 
 if [ "$INSTALL_ZSH" = "yes" ]; then
