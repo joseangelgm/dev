@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # use BASH_SOURCE to import another scripts because this file is always imported
-local path_sym="$(dirname $BASH_SOURCE)"
+path_sym="$(dirname $BASH_SOURCE)"
 source $path_sym/prompt.sh
 
 # $1 -> source
