@@ -14,5 +14,7 @@ export EDITOR=/usr/bin/vim
 export SUDO_EDITOR=/usr/bin/vim
 export BROWSER=/usr/bin/chromium
 
-# Example aliases
-export PATH=$HOME/.gem/ruby/2.7.0/bin:$PATH
+# export cargo for rust
+export PATH=$HOME/.cargo/bin:$PATH
+
+###################
