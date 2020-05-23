@@ -1,0 +1,8 @@
+#!/bin/bash
+
+card=$(glxinfo | grep "OpenGL renderer")
+
+case $card in
+    *Nvidia*|*GeForce*|*GTX*) echo "Nvidia";;
+    *Intel*) echo "Intel";;
+esac
