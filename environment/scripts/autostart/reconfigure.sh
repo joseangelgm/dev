@@ -14,26 +14,20 @@ display=$(env | grep DISPLAY)
 
 # when turn on, if ssh then DISPLAY is not set
 if [[ $? -eq 0 ]]; then
-    hdmi_state=$(xrandr | grep HDMI1 | awk '{print $2}')
+    hdmi_state=$(xrandr | grep HDMI | awk '{print $2}')
 
-    if [ $hdmi_state = "connected" ]
-    then
-        xrandr --output eDP1 --primary --mode 1366x768 --pos 277x1080 --rotate normal --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
-        nitrogen --restore
-    elif [ $hdmi_state = "disconnected" ]
-    then
-        xrandr --output HDMI1 --off --output VIRTUAL1 --off --output eDP1 --primary --mode 1366x768 --pos 0x0 --rotate normal
-        nitrogen --restore
-    else
-        echo ""
+    if [ $hdmi_state = "connected" ]; then
+        /home/$USER/Workspace/dev/environment/components/screen/install.sh -n
+    elif [ $hdmi_state = "disconnected" ]; then
+        /home/$USER/Workspace/dev/environment/components/screen/install.sh -i
     fi
 fi
 
 #############################################
 
-#### Turn off wifi card if lan card is connected to the network
+#### Turn off wifi card if lan cable is plugged in
 
-LAN_CARD="enp4s0"
+LAN_CARD="enp3s0"
 
 if [[ "$(cat /sys/class/net/$LAN_CARD/operstate)" = 'up' ]]; then
     nmcli radio wifi off
@@ -51,5 +45,3 @@ fi
 #####################################
 sleep 2
 i3-msg reload
-fi
-

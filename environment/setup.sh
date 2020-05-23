@@ -8,7 +8,7 @@
 
 usage(){
     echo
-    echo " Usage: $(basename $0) [-a] [-g] [-v] [-z] [-i] [-n] [-c] [-t] [-r] [-m] [-h]"
+    echo " Usage: $(basename $0) [-a] [-g] [-v] [-z] [-i] [-n] [-c] [-t] [-r] [-m] [-l] [-s] [-h]"
     echo " -a: install all. (Not included tmux)"
     echo " -g: install git configuration: gitconfig"
     echo " -v: install vim. Include .vimrc, .vim folder and plugins(gitsubmodules)"
@@ -19,6 +19,8 @@ usage(){
     echo " -t: install tmux. Package and config file."
     echo " -r: install rofi. Package and config file."
     echo " -m: install NetworkManager scripts to handle wifi and ethernet."
+    echo " -l: install launchers. These files are located in scripts/launchers folder."
+    echo " -s: install autostarts scripts. These files are located in scripts/autostart folder."
     echo " -h: prints this help."
 }
 
@@ -30,6 +32,7 @@ fi
 #### VARIABLES ####
 ROOT_DIR=$(dirname $0)
 COMPONENTS=$ROOT_DIR/components
+SCRIPTS=$ROOT_DIR/scripts
 
 INSTALL_GIT="no"
 INSTALL_VIM="no"
@@ -40,8 +43,10 @@ INSTALL_COMPTON="no"
 INSTALL_TMUX="no"
 INSTALL_ROFI="no"
 INSTALL_NETWORK="no"
+INSTALL_LAUNCHERS="no"
+INSTALL_AUTOSTART="no"
 
-PARAMETERS="avzinctrmh"
+PARAMETERS="avzinctrmlsh"
 
 while getopts $PARAMETERS opt; do
     case $opt in
@@ -58,6 +63,8 @@ while getopts $PARAMETERS opt; do
         t) INSTALL_TMUX="yes";;
         r) INSTALL_ROFI="yes";;
         m) INSTALL_NETWORK="yes";;
+        l) INSTALL_LAUNCHERS="yes";;
+        s) INSTALL_AUTOSTART="yes";;
         h) usage; exit 0;;
         ?) usage; exit 1;; # invalid option, not included in PARAMETERS
     esac
@@ -97,4 +104,12 @@ fi
 
 if [ "$INSTALL_NETWORK" = "yes" ]; then
     $ROOT_DIR/$COMPONENTS/network/install.sh
+fi
+
+if [ "$INSTALL_LAUNCHERS" = "yes" ]; then
+    $SCRIPTS/install.sh -l
+fi
+
+if [ "$INSTALL_AUTOSTART" = "yes" ]; then
+    $SCRIPTS/install.sh -s
 fi
