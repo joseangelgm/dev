@@ -3,7 +3,7 @@
 # Created by Jose Angel Garrido Montoya
 
 ICON=""
-INTERFACES=("enp3s0" "wlo1")
+INTERFACES=("$LAN_IFACE" "$WIFI_IFACE")
 INTERFACE="none"
 
 for interface in "${INTERFACES[@]}"; do

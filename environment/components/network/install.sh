@@ -2,7 +2,7 @@
 
 # variables
 path_file="$(dirname $(realpath $0))"
-lan_interface=$(nmcli device status | grep "ethernet" | awk '{print $1}')
+lan_interface=$LAN_IFACE
 network_path="/etc/NetworkManager/dispatcher.d"
 
 network_scripts="$path_file/NetworkScripts" # use dirname because this script is call from ../setup.sh
