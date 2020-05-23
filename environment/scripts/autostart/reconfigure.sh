@@ -18,7 +18,7 @@ if [[ $? -eq 0 ]]; then
 
     if [ $hdmi_state = "connected" ]; then
         /home/$USER/Workspace/dev/environment/components/screen/install.sh -n
-    elif [ $hdmi_state = "disconnected" ]; then
+    else
         /home/$USER/Workspace/dev/environment/components/screen/install.sh -i
     fi
 fi

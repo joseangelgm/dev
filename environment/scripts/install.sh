@@ -3,8 +3,8 @@
 usage(){
     echo
     echo " Usage: $(basename $0) [-l] [-s] [-h]"
-    echo " -l: install launchers. These files are located in scripts/launchers folder."
-    echo " -s: install autostarts scripts. These files are located in scripts/autostart folder."
+    echo " -l: install launchers. Located in scripts/launchers folder. Installed in /usr/bin symbolic link."
+    echo " -s: install autostarts scripts. Located in scripts/autostart folder. Installed in /etc/profile.d symbolic link"
     echo " -h: prints this help."
 }
 
@@ -38,15 +38,22 @@ while getopts $PARAMETERS opt; do
 done
 
 if [ "$INSTALL_LAUNCHERS" = "yes" ]; then
-    # installing spoty_launcher.sh
-    echo
-    echo "Installing spoty_launcher.sh"
-    create_symbolic_link $LAUNCHERS/spoty_launcher.sh /usr/bin/spoty_launcher "yes"
+
+    files=$(ls $LAUNCHERS)
+    for file in $files
+    do
+        echo "Installing $file"
+        create_symbolic_link $LAUNCHERS/$file /usr/bin/$file "yes"
+    done
 fi
 
 if [ "$INSTALL_AUTOSTART" = "yes" ]; then
-    # installing reconfigure.sh
-    echo
-    echo "Installing reconfigure.sh"
-    create_symbolic_link $AUTOSTART/reconfigure.sh /etc/profile.d/reconfigure.sh "yes"
+
+    files=$(ls $AUTOSTART)
+    for file in $files
+    do
+        echo "Installing $file"
+        create_symbolic_link $AUTOSTART/$file /etc/profile.d/$file "yes"
+    done
+
 fi
