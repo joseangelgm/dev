@@ -13,7 +13,7 @@ STATE=$(acpi | head -n 1 | awk '{print $3}' | cut -d ',' -f 1)
 PERCENTAGE=$(acpi | head -n 1 | awk '{print $4}' | cut -d ',' -f 1 | cut -d '%' -f 1)
 TIME_LEFT=$(acpi | head -n 1 | awk '{print $5}')
 STATUS=$(acpi -t | head -n 1 | awk '{print $3}' | cut -d ',' -f 1)
-TEMPERATURE=$(acpi -t | head -n 1 | awk '{print $4}')
+TEMPERATURE=$(acpi -t | tail -n 1 | awk '{print $4}')
 
 if [[ "$STATE" = "Charging" ]]; then
     echo "$ICON_CHARGING $PERCENTAGE $TIME_LEFT $STATUS $TEMPERATURE"
