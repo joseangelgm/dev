@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ICON=""
+STATE=$(xset q | grep 'Num Lock' | awk '{print $8}')
+
+echo "$ICON"
+echo "$ICON"
+
+if [ "$STATE" = "on" ]; then
+		echo "#42F459"
+else
+		echo "#EF5240"
+fi
