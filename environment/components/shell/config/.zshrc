@@ -16,5 +16,5 @@ export BROWSER=/usr/bin/chromium
 
 # export cargo for rust
 export PATH=$HOME/.cargo/bin:$PATH
-
+export PATH=$HOME/.gem/ruby/2.7.0/bin:$PATH
 ###################
