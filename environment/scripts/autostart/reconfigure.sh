@@ -10,10 +10,10 @@
 
 #### Turn on monitor if it is connected ####
 
-display=$(env | grep DISPLAY)
+env | grep SSH_CLIENT
 
-# when turn on, if ssh then DISPLAY is not set
-if [[ $? -eq 0 ]]; then
+# when we connect thought ssh, we have SSH_CLIENT env variable
+if [[ $? -eq 1 ]]; then
     hdmi_state=$(xrandr | grep HDMI | awk '{print $2}')
 
     if [ $hdmi_state = "connected" ]; then
@@ -21,27 +21,25 @@ if [[ $? -eq 0 ]]; then
     else
         /home/$USER/Workspace/dev/environment/components/screen/install.sh -i
     fi
-fi
 
+    #### Turn off wifi card if lan cable is plugged in
+    LAN_CARD="enp3s0"
+
+    if [[ "$(cat /sys/class/net/$LAN_CARD/operstate)" = 'up' ]]; then
+        nmcli radio wifi off
+    else
+        nmcli radio wifi on
+    fi
+
+    #####################################################
+
+    #### Disalbe touchscreen ############
+
+    # id_touchscreen=$(xinput | grep 'ELAN Touchscreen' | awk {'print $5'} | cut -d '=' -f 2)
+    # xinput disable "$id_touchscreen"
+
+    #####################################
+    sleep 2
+    i3-msg reload
+fi
 #############################################
-
-#### Turn off wifi card if lan cable is plugged in
-
-LAN_CARD="enp3s0"
-
-if [[ "$(cat /sys/class/net/$LAN_CARD/operstate)" = 'up' ]]; then
-    nmcli radio wifi off
-else
-    nmcli radio wifi on
-fi
-
-#####################################################
-
-#### Disalbe touchscreen ############
-
-# id_touchscreen=$(xinput | grep 'ELAN Touchscreen' | awk {'print $5'} | cut -d '=' -f 2)
-# xinput disable "$id_touchscreen"
-
-#####################################
-sleep 2
-i3-msg reload
