@@ -8,8 +8,8 @@ case $BLOCK_BUTTON in
     5) amixer set Master 5%- > /dev/null;; # scroll down
 esac
 
-VOLUME_LEVEL=$(amixer get $MIXER | grep Mono: | awk '{print $4}' | cut -d '[' -f 2 | cut -d ']' -f 1 | cut -d '%' -f 1)
-STATE=$(amixer get $MIXER | grep Mono: | awk '{print $6}' | cut -d '[' -f 2 | cut -d ']' -f 1)
+VOLUME_LEVEL=$(amixer -D pulse get Master | grep 'Front Left:' | awk '{print $5}' | cut -d '[' -f 2 | cut -d ']' -f 1 | cut -d '%' -f 1)
+STATE=$(amixer -D pulse get Master | grep 'Front Left:' | awk '{print $6}' | cut -d '[' -f 2 | cut -d ']' -f 1)
 
 if [[ "$STATE" = "on" ]]; then
 
