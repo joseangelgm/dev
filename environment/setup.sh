@@ -94,6 +94,10 @@ if [ "$INSTALL_COMPTON" = "yes" ]; then
     $ROOT_DIR/$COMPONENTS/compton/install.sh
 fi
 
+if [ "$INSTALL_ZSH" = "yes" ]; then
+    $ROOT_DIR/$COMPONENTS/shell/install.sh -z
+fi
+
 if [ "$INSTALL_TMUX" = "yes" ]; then
     $ROOT_DIR/$COMPONENTS/shell/install.sh -t
 fi
