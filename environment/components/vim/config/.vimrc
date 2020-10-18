@@ -108,6 +108,12 @@ let g:cpp_simple_highlight = 1
 let g:cpp_named_requirements_highlight = 1
 let c_no_curly_error = 1
 
+" zc -> close
+" zo -> open
+" za -> toggle
+nnoremap <space> za
+set foldmethod=indent
+
 " Plugin vim-gitbranch
 let g:lightline = {
             \ 'colorscheme': 'powerline',
