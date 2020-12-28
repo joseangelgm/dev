@@ -1,3 +1,4 @@
 environment/components/shell/config/.oh-my-zsh/
 environment/components/i3/blocks/weather_data.yaml
 environment/components/shell/config/.warprc
+environment/components/shell/config/.oh-my-zsh/cache/.zsh-update
