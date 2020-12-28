@@ -112,7 +112,7 @@ let c_no_curly_error = 1
 " zo -> open
 " za -> toggle
 nnoremap <space> za
-set foldmethod=indent
+""set foldmethod=indent
 
 " Plugin vim-gitbranch
 let g:lightline = {
