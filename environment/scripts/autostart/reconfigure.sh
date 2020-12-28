@@ -14,13 +14,13 @@ env | grep SSH_CLIENT
 
 # when we connect thought ssh, we have SSH_CLIENT env variable
 if [[ $? -eq 1 ]]; then
-    hdmi_state=$(xrandr | grep HDMI | awk '{print $2}')
+    #hdmi_state=$(xrandr | grep HDMI | awk '{print $2}')
 
-    if [ $hdmi_state = "connected" ]; then
-        /home/$USER/Workspace/dev/environment/components/screen/install.sh -n
-    else
-        /home/$USER/Workspace/dev/environment/components/screen/install.sh -i
-    fi
+    #if [ $hdmi_state = "connected" ]; then
+    #    /home/$USER/Workspace/dev/environment/components/screen/install.sh -n
+    #else
+    #    /home/$USER/Workspace/dev/environment/components/screen/install.sh -i
+    #fi
 
     #### Turn off wifi card if lan cable is plugged in
     LAN_CARD="enp3s0"
