@@ -3,7 +3,7 @@
 MIXER="Master"
 
 case $BLOCK_BUTTON in
-    3) amixer set Master toggle  > /dev/null;; # right click
+    3) amixer -D pulse set Master toggle  > /dev/null;; # right click
     4) amixer set Master 5%+ > /dev/null;; # scroll up
     5) amixer set Master 5%- > /dev/null;; # scroll down
 esac
