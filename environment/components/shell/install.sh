@@ -35,6 +35,7 @@ if [ $INSTALL_ZSH = "yes" ]; then
         install_package $ZSH_PACKAGE
     fi
 
+    create_symbolic_link "$CONFIG_DIR/.profile" "$HOME/.profile"
     create_symbolic_link "$CONFIG_DIR/.zshrc" "$HOME/.zshrc"
     create_symbolic_link "$CONFIG_DIR/.oh-my-zsh" "$HOME/.oh-my-zsh"
 
