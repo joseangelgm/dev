@@ -64,7 +64,7 @@ if [ $INSTALL_ZSH = "yes" ]; then
 
     # installing .warprc for wd zsh plugin
     echo
-    echo "Setting up warprcs"
+    echo "Setting up .warprc"
     create_symbolic_link "$CONFIG_DIR/.warprc" "$HOME/.warprc"
     ######################################
 fi
