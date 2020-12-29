@@ -78,10 +78,6 @@ if [ "$INSTALL_VIM" = "yes" ]; then
     $ROOT_DIR/$COMPONENTS/vim/install.sh
 fi
 
-if [ "$INSTALL_ZSH" = "yes" ]; then
-    $ROOT_DIR/$COMPONENTS/shell/install.sh -z
-fi
-
 if [ "$INSTALL_I3" = "yes" ]; then
     $ROOT_DIR/$COMPONENTS/i3/install.sh
 fi

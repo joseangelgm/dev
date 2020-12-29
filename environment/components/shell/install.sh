@@ -35,8 +35,11 @@ if [ $INSTALL_ZSH = "yes" ]; then
         install_package $ZSH_PACKAGE
     fi
 
+    echo
     create_symbolic_link "$CONFIG_DIR/.profile" "$HOME/.profile"
+    echo
     create_symbolic_link "$CONFIG_DIR/.zshrc" "$HOME/.zshrc"
+    echo
     create_symbolic_link "$CONFIG_DIR/.oh-my-zsh" "$HOME/.oh-my-zsh"
 
     shell=$(echo $SHELL)
@@ -55,10 +58,11 @@ if [ $INSTALL_ZSH = "yes" ]; then
         install_package $TERMINATOR_PACKAGE
     fi
 
-    # check if the location of terminator exists exists
+    # check if the location of terminator exists
     if [ ! -d "$HOME/.config/terminator" ]; then
         mkdir "$HOME/.config/terminator"
     fi
+    echo
     create_symbolic_link "$CONFIG_DIR/terminator.conf" "$HOME/.config/terminator/config"
     ####################
 
